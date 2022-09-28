@@ -1,4 +1,4 @@
-import mindustry.content;
+import reconstruct.content;
 
 import arc.struct.*;
 import mindustry.game.Objectives.*;
@@ -11,60 +11,60 @@ import static mindustry.content.UnitTypes.*;
 
 public class SevrenTechTree {
     public static void load() {
-        Planets.sevren.techtree = nodeRoot("sevren", coreDebris, () -> {
-            node(scrapConveyor, () -> {
-                node(scrapJunction, () -> {
-                    node(scrapRouter, () -> {
-                        node(cobaltContainer, () -> {
-                            node(cobaltVault, () -> {
+        Planets.sevren.techtree = nodeRoot("sevren", RSBlocks.coreDebris, () -> {
+            node(RSBlocks.scrapConveyor, () -> {
+                node(RSBlocks.scrapJunction, () -> {
+                    node(RSBlocks.scrapRouter, () -> {
+                        node(RSBlocks.cobaltContainer, () -> {
+                            node(RSBlocks.cobaltVault, () -> {
 
                             });
-                            node(cobaltUnloader, () -> {
+                            node(RSBlocks.cobaltUnloader, () -> {
 
                             });
                         });
-                        node(scrapBridge, () -> {
-                            node(goldConveyor, () -> {
-                                node(phaseBridge, () -> {
-                                    node(PhaseRouter, () -> {
-                                        node(reforgedMassDriver, () -> {
-                                            node(reforgedPayloadMassDriver, () -> {
-                                                node(reforgedPayloadPropulsionTower, () -> {
+                        node(RSBlocks.scrapBridge, () -> {
+                            node(RSBlocks.goldConveyor, () -> {
+                                node(RSBlocks.phaseBridge, () -> {
+                                    node(RSBlocks.phaseRouter, () -> {
+                                        node(RSBlocks.reforgedMassDriver, () -> {
+                                            node(RSBlocks.reforgedPayloadMassDriver, () -> {
+                                                node(RSBlocks.reforgedPayloadPropulsionTower, () -> {
 
                                                 });
                                             });
-                                            node(plasteelBuildTower, () -> {
+                                            node(RSBlocks.plasteelBuildTower, () -> {
 
                                             });
                                         });
                                     });
                                 });
-                                node(scrapPayloadConveyor, () -> {
-                                    node(scrapPayloadRouter, () -> {
-                                        node(scrapPayloadBridge, () -> {
+                                node(RSBlocks.scrapPayloadConveyor, () -> {
+                                    node(RSBlocks.scrapPayloadRouter, () -> {
+                                        node(RSBlocks.scrapPayloadBridge, () -> {
 
                                         });
                                     });
                                 });
-                                node(cobaltArmoredConveyor, () -> {
-                                    node(thoriumConveyor, () -> {
-                                        node(thoriumRouter, () -> {
+                                node(RSBlocks.cobaltArmoredConveyor, () -> {
+                                    node(RSBlocks.thoriumConveyor, () -> {
+                                        node(RSBlocks.thoriumRouter, () -> {
 
                                         });
                                     });
                                 });
-                                node(scrapConstructor, () ->  {
-                                    node(scrapPayloadLoader, () -> {
-                                        node(scrapPayloadUnloader, () -> {
+                                node(RSBlocks.scrapConstructor, () ->  {
+                                    node(RSBlocks.scrapPayloadLoader, () -> {
+                                        node(RSBlocks.scrapPayloadUnloader, () -> {
 
                                         });
                                     });
-                                    node(scrapDeconstructor, () -> {
-                                        node(massScrapDeconstructor, () -> {
+                                    node(RSBlocks.scrapDeconstructor, () -> {
+                                        node(RSBlocks.massScrapDeconstructor, () -> {
 
                                         });
                                     });
-                                    node(massScrapConstructor, () -> {
+                                    node(RSBlocks.massScrapConstructor, () -> {
 
                                     });
                                 });
@@ -73,71 +73,31 @@ public class SevrenTechTree {
                     });
                 });
             });
-            node(coreRemnant, () -> {
-                node(coreFragment, () -> {
+            node(RSBlocks.coreRemnant, () -> {
+                node(RSBlocks.coreFragment, () -> {
 
                 });
             });
-            node(mechanicalPumpDrill, () -> {
-                node(cometSling, () -> {
-                    node(scrapConduit, () -> {
-                        node(scrapConduitJunction, () -> {
-                            node(scrapConduitRouter, () -> {
-                                node(goldFluidTank, () -> {
-                                    node(cobaltFluidTank, () -> {
+            node(RSBlocks.mechanicalPumpDrill, () -> {
+                node(RSBlocks.cometSling, () -> {
+                    node(RSBlocks.scrapConduit, () -> {
+                        node(RSBlocks.scrapConduitJunction, () -> {
+                            node(RSBlocks.scrapConduitRouter, () -> {
+                                node(RSBlocks.goldFluidTank, () -> {
+                                    node(RSBlocks.cobaltFluidTank, () -> {
 
                                     });
                                 });
-                                node(scrapConduitBridge, () -> {
-                                    node(phaseConduitBridge, () -> {
+                                node(RSBlocks.scrapConduitBridge, () -> {
+                                    node(RSBlocks.phaseConduitBridge, () -> {
 
                                     });
                                 });
-                                node(cobaltConduit, () -> {
+                                node(RSBlocks.cobaltConduit, () -> {
 
                                 });
-                                node(fluidPump, () -> {
-                                    node(largeFluidPump, () -> {
-
-                                    });
-                                });
-                            });
-                        });
-                    });
-                });
-                node(goldRefinery, () -> {
-                    node(hydrokineticDrill, () -> {
-                        node(thoriumDrill, () -> {
-                            node(blastDrill, () -> {
-
-                            });
-                        });
-                    });
-                    node(pyratiteMelder, () -> {
-                        node(plasteelBlastMixer, () -> {
-
-                        });
-                    });
-                    node(sandCrusher, () -> {
-                        node(graphiteInfuser, () -> {
-                            node(siliconFrostforge, () -> {
-                                node(plasteelCrucible, () -> {
-                                    node(phaseForge, () -> {
-
-                                    });
-                                });
-                            });
-                        });
-                        node(slagMelter, () -> {
-                            node(cobaltExtractor, () -> {
-                                node(pyrokiln, () -> {
-
-                                });
-                                node(meteorSling, () -> {
-                                    node(cryofluidSynthesizer, () -> {
-
-                                    });
-                                    node(surgeBlaster, () -> {
+                                node(RSBlocks.fluidPump, () -> {
+                                    node(RSBlocks.largeFluidPump, () -> {
 
                                     });
                                 });
@@ -145,26 +105,70 @@ public class SevrenTechTree {
                         });
                     });
                 });
-                node(metaglassSolarPanel, () -> {
-                    node(powerPropulsor, () -> {
-                        node(powerRouter, () -> {
-                            
+                node(RSBlocks.goldRefinery, () -> {
+                    node(RSBlocks.hydrokineticDrill, () -> {
+                        node(RSBlocks.thoriumDrill, () -> {
+                            node(RSBlocks.blastDrill, () -> {
+
+                            });
                         });
-                        node(regenerativeTurret, () -> {
-                            node(phaseShieldGenerator, () -> {
-                                node(overdriver, () -> {
-                                    node(plasteelOverdriver, () -> {
-                                        node(pulsewaveTower, () -> {
+                    });
+                    node(RSBlocks.pyratiteMelder, () -> {
+                        node(RSBlocks.plasteelBlastMixer, () -> {
+
+                        });
+                    });
+                    node(RSBlocks.sandCrusher, () -> {
+                        node(RSBlocks.graphiteInfuser, () -> {
+                            node(RSBlocks.siliconFrostforge, () -> {
+                                node(RSBlocks.plasteelCrucible, () -> {
+                                    node(RSBlocks.phaseForge, () -> {
+
+                                    });
+                                });
+                            });
+                        });
+                        node(RSBlocks.slagMelter, () -> {
+                            node(RSBlocks.cobaltExtractor, () -> {
+                                node(RSBlocks.pyrokiln, () -> {
+
+                                });
+                                node(RSBlocks.meteorSling, () -> {
+                                    node(RSBlocks.cryofluidSynthesizer, () -> {
+
+                                    });
+                                    node(RSBlocks.surgeBlaster, () -> {
+
+                                    });
+                                });
+                            });
+                        });
+                    });
+                });
+                node(RSBlocks.metaglassSolarPanel, () -> {
+                    node(RSBlocks.powerPropulsor, () -> {
+                        node(RSBlocks.powerRouter, () -> {
+                            node(RSBlocks.payloadPowerPropulsor, () -> {
+                                node(RSBlocks.payloadPowerRouter, () -> {
+                                    
+                                });
+                            });
+                        });
+                        node(RSBlocks.regenerativeTurret, () -> {
+                            node(RSBlocks.phaseShieldGenerator, () -> {
+                                node(RSBlocks.overdriver, () -> {
+                                    node(RSBlocks.plasteelOverdriver, () -> {
+                                        node(RSBlocks.pulsewaveTower, () -> {
 
                                         });
                                     });
                                 });
                             });
                         });
-                        node(largeMetaglassSolarPanel, () -> {
-                            node(phasePanel, () -> {
-                                node(largePhasePanel, () -> {
-                                    node(fragmentedNeoplasiaReactor, () -> {
+                        node(RSBlocks.largeMetaglassSolarPanel, () -> {
+                            node(RSBlocks.phasePanel, () -> {
+                                node(RSBlocks.largePhasePanel, () -> {
+                                    node(RSBlocks.fragmentedNeoplasiaReactor, () -> {
 
                                     });
                                 });
@@ -174,31 +178,31 @@ public class SevrenTechTree {
                 });
             });
         });
-        node(scrappedDuo, () -> {
-            node(refinedScrapWall, () -> {
-                node(largeRefinedScrapWall, () -> {
-                    node(goldWall, () -> {
-                        node(largeGoldWall, () -> {
+        node(RSBlocks.scrappedDuo, () -> {
+            node(RSBlocks.refinedScrapWall, () -> {
+                node(RSBlocks.largeRefinedScrapWall, () -> {
+                    node(RSBlocks.goldWall, () -> {
+                        node(RSBlocks.largeGoldWall, () -> {
 
                         });
-                        node(refinedScrapDoor, () -> {
-                            node(largeRefinedScrapDoor, () -> {
-                                node(autoRefinedScrapDoor, () -> {
+                        node(RSBlocks.refinedScrapDoor, () -> {
+                            node(RSBlocks.largeRefinedScrapDoor, () -> {
+                                node(RSBlocks.autoRefinedScrapDoor, () -> {
 
                                 });
                             });
                         });
-                        node(plasteelWall, () -> {
-                            node(largePlasteelWall, () -> {
+                        node(RSBlocks.plasteelWall, () -> {
+                            node(RSBlocks.largePlasteelWall, () -> {
 
                             });
                         });
-                        node(cobaltWall, () -> {
-                            node(largeCobaltWall, () -> {
+                        node(RSBlocks.cobaltWall, () -> {
+                            node(RSBlocks.largeCobaltWall, () -> {
 
                             });
-                            node(surgeWall, () -> {
-                                node(LargeSurgeWall, () -> {
+                            node(RSBlocks.scrapSurgeWall, () -> {
+                                node(RSBlocks.largeScrapSurgeWall, () -> {
 
                                 });
                             });
@@ -206,20 +210,20 @@ public class SevrenTechTree {
                     });
                 });
             });
-            node(scrapHail, () -> {
-                node(lavaflowTurret, () -> {
-                    node(slagPropulsor, () -> {
+            node(RSBlocks.scrapHail, () -> {
+                node(RSBlocks.lavaflowTurret, () -> {
+                    node(RSBlocks.slagPropulsor, () -> {
 
                     });
                 });
             });
-            node(scrapTurret, () -> {
-                node(reinforcedScrapTurret, () -> {
-                    node(voidedTurret, () -> {
-                        node(multiTurret, () -> {
-                            node(chargeTurret, () -> {
-                                node(anarchyTurret, () -> {
-                                    node(neoplasiaMeteorTurret, () -> {
+            node(RSBlocks.scrapTurret, () -> {
+                node(RSBlocks.reinforcedScrapTurret, () -> {
+                    node(RSBlocks.voidedTurret, () -> {
+                        node(RSBlocks.multiTurret, () -> {
+                            node(RSBlocks.chargeTurret, () -> {
+                                node(RSBlocks.anarchyTurret, () -> {
+                                    node(RSBlocks.neoplasiaMeteorTurret, () -> {
 
                                     });
                                 });
@@ -229,7 +233,7 @@ public class SevrenTechTree {
                 });
             });
         });
-        node(spiderUnitFactory, () -> {
+        node(RSBlocks.spiderUnitFactory, () -> {
             node(rain, () -> {
                 node(storm, () -> {
                     node(whirlwind, () -> {
@@ -263,7 +267,7 @@ public class SevrenTechTree {
                     });
                 });
             });
-            node(hoverUnitFactory, () -> {
+            node(RSBlocks.hoverUnitFactory, () -> {
                 node(frost, () -> {
                     node(hail, () -> {
                         node(ice, () -> {
@@ -297,7 +301,7 @@ public class SevrenTechTree {
                         });
                     });
                 });
-                node(boatUnitFactory, () -> {
+                node(RSBlocks.boatUnitFactory, () -> {
                     node(gale, () -> {
                         node(furor, () -> {
                             node(squall, () -> {
@@ -333,10 +337,10 @@ public class SevrenTechTree {
                     });
                 });
             });
-            node(pointRefabricator, () -> {
-                node(lineRefabricator, () -> {
-                    node(planeRefabricator, () -> {
-                        node(polygonRefabricator, () -> {
+            node(RSBlocks.pointRefabricator, () -> {
+                node(RSBlocks.lineRefabricator, () -> {
+                    node(RSBlocks.planeRefabricator, () -> {
+                        node(RSBlocks.polygonRefabricator, () -> {
 
                         });
                     });
@@ -372,20 +376,20 @@ public class SevrenTechTree {
         });
         nodeProduce(Items.scrap, () -> {
             nodeProduce(Liquids.slag, () -> {
-                nodeProduce(Items.gold, () -> {
+                nodeProduce(RSItems.gold, () -> {
                     nodeProduce(Liquids.water, () -> {
                         nodeProduce(Liquids.ozone, () -> {
 
                         });
                         nodeProduce(Liquids.hydrogen, () -> {
-                            nodeProduce(Items.plasteel, () -> {
+                            nodeProduce(RSItems.plasteel, () -> {
 
                             });
                         });
                     });
                 });
             });
-            nodeProduce(Items.cobalt, () -> {
+            nodeProduce(RSItems.cobalt, () -> {
                 nodeProduce(Liquids.cryofluid, () -> {
 
                 });
