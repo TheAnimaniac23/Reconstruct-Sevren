@@ -42,9 +42,7 @@ import mindustry.world.blocks.distribution.*;
 import mindustry.world.blocks.environment.Floor;
 import mindustry.world.blocks.environment.OreBlock;
 import mindustry.world.blocks.environment.StaticWall;
-import mindustry.world.blocks.liquid.Conduit;
-import mindustry.world.blocks.liquid.LiquidBridge;
-import mindustry.world.blocks.liquid.LiquidRouter;
+import mindustry.world.blocks.liquid.*;
 import mindustry.world.blocks.power.Battery;
 import mindustry.world.blocks.power.ConsumeGenerator;
 import mindustry.world.blocks.power.PowerNode;
@@ -54,6 +52,7 @@ import mindustry.world.blocks.sandbox.ItemSource;
 import mindustry.world.blocks.sandbox.LiquidSource;
 import mindustry.world.blocks.sandbox.PowerVoid;
 import mindustry.world.blocks.storage.StorageBlock;
+import mindustry.world.blocks.payloads.*;
 import mindustry.world.consumers.ConsumeCoolant;
 import mindustry.world.draw.*;
 import mindustry.world.meta.Attribute;
@@ -72,9 +71,9 @@ public class SevrenBlocks {
         pulsewaveTower,
 
         // production
-        goldRefinery, pyratiteMelder, plasteelBlastMixer, sandCrusher, graphiteInfuser, siliconFrostforge, 
+        goldRefinery, pyratiteMelder, plasteelBlastMixer, scrapCrusher, graphiteInfuser, siliconFrostforge, 
         plasteelCrucible, phaseForge, slagMelter, cobaltExtractor, pyrokiln, meteorSling, cryofluidSynthesizer,
-        surgeBlaster, cometSling,
+        surgeBlaster, cometSling, hydroDeconstructor,
 
         // fluid
         scrapConduit, scrapConduitJunction, scrapConduitRouter, goldFluidTank, cobaltFluidTank, 
@@ -297,7 +296,7 @@ public class SevrenBlocks {
             shieldHealth = 800f;
             cooldownLiquid = 1f;
             cooldownBrokenBase = 0.3f;
-            itemConsumer = consumeItem(Items.phaseFabric).boost();
+            itemConsumer = consumeItems(Items.phaseFabric).boost();
             consumePower(3.2f);
         }};
         overdriver = new OverdriveProjector("overdriver"){{
@@ -308,7 +307,7 @@ public class SevrenBlocks {
             speedBoost = 1.25f;
             useTime = 300f;
             hasBoost = false;
-            consumeItem(RSItems.plasteel, 1).boost();
+            consumeItems(RSItems.plasteel, 1).boost();
             consumePower(1.6f);
         }};
         plasteelOverdriver = new OverdriveProjector("plasteel-overdriver"){{
@@ -319,8 +318,8 @@ public class SevrenBlocks {
             speedBoost = 2.25f;
             useTime = 300f;
             hasBoost = false;
-            consumeItem(RSItems.plasteel, 1);
-            consumeItem(Items.graphite, 1).boost();
+            consumeItems(RSItems.plasteel, 1);
+            consumeItems(Items.graphite, 1).boost();
             consumePower(3.2f);
         }};
         pulsewaveTower = new ShockwaveTower("pulsewave-tower"){{
@@ -333,6 +332,8 @@ public class SevrenBlocks {
             falloffCount = 20f;
             shake = 4f;
             waveColor = Color.valueOf("ff2a04");
+            consumePower(7.5f);
+            consumeLiquids(LiquidStack.with(Liquids.hydrofluid, 4, Liquids.cryofluid, 2));
         }};
 
         // production
@@ -352,7 +353,7 @@ public class SevrenBlocks {
             size = 2
             health = 200;
             hasPower = true;
-            consumeItem(with(Item.sand, 2, Item.coal, 2, RSItems.cobalt, 1));
+            consumeItems(with(Item.sand, 2, Item.coal, 2, RSItems.cobalt, 1));
             consumePower(0.32f);
         }};
         plasteelBlastMixer = new GenericCrafter("plasteel-blast-mixer"){{
@@ -362,7 +363,222 @@ public class SevrenBlocks {
             health = 400;
             hasPower = true;
             consumePower(0.8f);
-            consumeItem(with(RSItems.plasteel, 3, Items.pyratite, 2, Items.coal, 3));
+            consumeItems(with(RSItems.plasteel, 3, Items.pyratite, 2, Items.coal, 3));
+        }};
+        scrapCrusher = new GenericCrafter("scrap-crusher"){{
+            requirements(Category.crafting, with(Items.scrap, 20, RSItems.gold, 10));
+            outputItem = new ItemStack(Items.sand, 1);
+            size = 2;
+            health = 200;
+            hasPower = false;
+            consumeItems(with(Items.scrap, 1));
+        }};
+        graphiteInfuser = new GenericCrafter("graphite-infuser"){{
+            requirements(Category.crafting, with(Items.scrap, 20, RSItems.gold, 10));
+            outputItem = new ItemStack(Items.graphite, 3);
+            size = 3;
+            health = 350;
+            hasPower = false;
+            consumeItems(with(Items.coal, 3));
+        }};
+        siliconFrostforge = new GenericCrafter("silicon-frostforge"){{
+            requirements(Category.crafting, with(Items.scrap, 15, Items.graphite, 20, RSItems.gold, 10));
+            outputItem = new ItemStack(Items.silicon, 2);
+            size = 3;
+            health = 400;
+            hasPower = false;
+            consumeItems(with(Items.coal, 1, Items.sand, 2));
+        }};
+        plasteelCrucible = new GenericCrafter("plasteel-crucible"){{
+            requirements(Category.crafting, with(Items.thorium, 25, RSItems.gold, 30, RSItems.cobalt, 20));
+            outputItem = new ItemStack(RSItems.plasteel, 2);
+            size = 3;
+            health = 500;
+            liquidCapacity = 20f;
+            consumeItems(with(Items.coal, 4, Items.cobalt, 2));
+            consumeLiquids(LiquidStack.with(Liquids.ozone, 4.5f, Liquids.hydrogen, 2));
+            consumePower(3.2f);
+        }};
+        phaseForge = new GenericCrafter("phase-forge"){{
+            requirements(Category.crafting, with(Items.thorium, 45, Items.silicon, 100, RSItems.cobalt, 200));
+            outputItem = new ItemStack(Items.phaseFabric, 1);
+            health = 300;
+            size = 2;
+            consumeItems(with(Items.thorium, 4, Items.sand, 10));
+            consumePower(0.48f);
+        }};
+        slagMelter = new GenericCrafter("slag-melter"){{
+            requirements(Category.crafting, with(Items.scrap, 10, RSItems.gold, 15));
+            outputLiquid = new LiquidStack(Liquids.slag, 1.5f);
+            health = 100;
+            size = 1;
+            consumeItems(with(Items.scrap, 1));
+        }};
+        cobaltExtractor = new GenericCrafter("cobalt-extractor"){{
+            requirements(Category.crafting, with(Items.scrap, 20, Items.graphite, 10, RSItems.gold, 10));
+            outputItem = new ItemStack(RSItems.cobalt, 1);
+            health = 500;
+            size = 2;
+            consumeLiquids(LiquidStack.with(Liquids.slag, 1.5f));
+        }};
+        pyrokiln = new GenericCrafter("pyrokiln"){{
+            requirements(Category.crafting, with(Items.scrap, 10, Items.coal, 10, RSItems.cobalt, 15));
+            outputItem = new ItemStack(Items.metaglass, 1);
+            health = 210;
+            size = 2;
+            consumeItems(with(Items.sand, 1, Items.coal, 2));
+        }};
+        // meteorSling = new RSGravityMine("meteor-sling"){{}} -- NEEDS FINISHED
+        // cometSling = new RSGravityMine("comet-sling"){{}} -- NEEDS FINISHED
+        cryofluidSynthesizer = new GenericCrafter("cryofluid-synthesizer"){{
+            requirements(Category.crafting, with(Items.silicon, 30, RSItems.cobalt, 30, RSItems.gold, 15));
+            outputLiquid = new LiquidStack(Liquids.cryofluid, 1.5f);
+            health = 920;
+            size = 3;
+            consumeItems(with(RSItems.cobalt, 1));
+            consumeLiquids(LiquidStack.with(Liquids.water, 1.5f));
+            consumePower(0.8f);
+        }};
+        surgeBlaster = new GenericCrafter("surge-blaster"){{
+            requirements(Category.crafting, with(RSItems.plasteel, 80, Items.graphite, 100, Items.silicon, 100, RSItems.cobalt, 150));
+            health = 700;
+            size = 3;
+            consumeItems(with(Items.blastCompound, 15, Items.silicon, 5));
+            consumeLiquids(LiquidStack.with(Liquids.hydrogen, 3f, Liquids.slag, 10f));
+            consumePower(3.2f);
+        }};
+        hydroDeconstructor = new GenericCrafter("hydro-deconstructor"){{
+            requirements(Category.crafting, with(RSItems.gold, 15, RSItems.cobalt, 20));
+            outputLiquid = new LiquidStack(Liquids.hydrogen, 1f, Liquids.Ozone, 0.5f);
+            health = 300;
+            size = 2;
+            consumesLiquid(LiquidStack.with(Liquids.water, 1.5f));
+        }};
+
+        // fluids
+        scrapConduit = new Conduit("scrap-conduit"){{
+            requirements(Category.liquid, with(Items.scrap, 1, Items.metaglass, 1));
+            health = 45;
+            size = 1;
+            liquidCapacity = 5f;
+            liquidPressure = 1f;
+        }};
+        scrapConduitJunction = new LiquidJunction("scrap-conduit-function"){{
+            requirements(Category.liquid, with(Items.metaglass, 8, Items.scrap, 4, Items.graphite, 4));
+            health = 50;
+            size = 1;
+            liquidCapacity = 10f;
+            liquidPressure = 1.5f;
+        }};
+        scrapConduitRouter = new LiquidRouter("scrap-conduit-router"){{
+            requirements(Category.liquid, with(Items.scrap, 6, Items.graphite, 8));
+            health = 50;
+            size = 1;
+            liquidCapacity = 20f;
+            liquidPressure = 1.5f;
+        }};
+        goldFluidTank = new LiquidRouter("gold-fluid-tank"){{
+            requirements(Category.liquid, with(Items.scrap, 20, RSItems.gold, 16));
+            health = 300;
+            liquidCapacity = 800f;
+            size = 2;
+            liquidPressure = 2f;
+        }};
+        cobaltFluidTank = new LiquidRouter("cobalt-fluid-tank"){{
+            requirements(Category.liquid, with(RSItems.cobalt, 50, RSItems.gold, 40));
+            health = 700;
+            liquidCapacity = 1800f;
+            size = 3;
+            liquidPressure = 2f;
+        }};
+        scrapConduitBridge = new LiquidBridge("scrap-conduit-bridge"){{
+            requirements(Category.liquid, with(Items.metaglass, 8, Items.scrap, 4, Items.graphite, 4));
+            health = 100;
+            fadeIn = moveArrows = false;
+            size = 1;
+            range = 4;
+            arrowSpacing = 6f;
+        }};
+        phaseConduitBridge = new LiquidBridge("phase-conduit-bridge"){{
+            requirements(Category.liquid, with(Items.phaseFabric, 5, RSItems.cobalt, 10, RSItems.gold, 5));
+            health = 120;
+            size = 1;
+            range = 12;
+            arrowPeriod = 0.9f;
+            arrowTimeSc1 = 2.75f;
+            hasPower = true;
+            canOverdrive = true;
+            pulse = true;
+            consumePower(0.3f);
+        }};
+        cobaltConduit = new Conduit("cobalt-conduit"){{
+            requirements(Category.liquid, with(Items.scrap, 1, Items.metaglass, 1));
+            health = 100;
+            size = 1;
+            liquidCapacity = 16f;
+            liquidPressure = 1.25f;
+        }};
+        fluidPump = new Pump("fluid-pump"){{
+            requirements(Category.liquid, with(Items.scrap, 15, Items.metaglass, 20));
+            health = 20;
+            size = 1;
+            pumpAmmount = 0.5f;
+            hasPower = false;
+            liquidCapacity = 20f;
+        }};
+        largeFluidPump = new Pump('large-fluid-pump'){{
+            requirements(Category.liquid, with(RSItems.gold, 20, Items.metaglass, 30));
+            health = 100;
+            size = 2;
+            pumpAmmount = 1.5f;
+            hasPower = true;
+            liquidCapacity = 50f;
+            consumePower = 0.1f;
+        }};
+
+        // units
+        scrapPayloadConveyor = new PayloadConveyor("scrap-payload-conveyor"){{
+            requirements(Category.units, with(Items.scrap, 15, Items.graphite, 5));
+            moveTime = 45f;
+            size = 3;
+            health = 350;
         }}
+        scrapPayloadRouter = new PayloadRouter("scrap-payload-router"){{
+            requirements(Category.units, with(Items.scrap, 15, Items.graphite, 5));
+            moveTime = 45f;
+            size = 3;
+            health = 350;
+        }}
+        // scrapPayloadBridge = new PayloadBridge("scrap-payload-bridge"){{}} -- NEEDS FINISHED;
+        scrapConstructor = Constructor("scrap-constructor"){{
+            requirements(Category.units, with(Items.scrap, 120, RSItems.gold, 60, Items.silicon, 100));
+            regionSuffix = "-dark";
+            hasPower = true;
+            buildSpeed = 0.3f;
+            consumePower(1.92f);
+            size = 3;
+            filter = Seq.with(RSBlocks.cobaltContainer, RSBlocks.largeRefinedScrapWall, RSBlocks.largeGoldWall, RSBlocks.largePlasteelWall, RSBlocks.largeScrapSurgeWall, RSBlocks.goldFluidTank);
+        }};
+        massScrapConstructor = new Constructor("mass-scrap-constructor"){{
+            requirements(Category.units,with(Items.silicon, 150, Items.phaseFabric, 45, RSItems.cobalt, 200, RSItems.plasteel, 150));
+            regionSuffix = "-dark";
+            hasPower = true;
+            buildSpeed = 0.3f;
+            consumePower(3.2f);
+            size = 5;
+            filter = Seq.with(RSBlocks.cobaltContainer, RSBlocks.largeRefinedScrapWall, RSBlocks.largeGoldWall, RSBlocks.largePlasteelWall, RSBlocks.largeScrapSurgeWall, RSBlocks.goldFluidTank, RSBlocks.cobaltFluidTank, RSBlocks.cobaltVault);
+        }};
+        scrapDeconstructor
+        massScrapDeconstructor
+        scrapPayloadLoader
+        scrapPayloadUnloader
+        spiderUnitFactory
+        hoverUnitFactory
+        boatUnitFactory
+        pointRefabricator
+        lineRefabricator
+        planeRefabricator
+        polygonRefebricator
+
     }
 }

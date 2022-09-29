@@ -103,6 +103,9 @@ public class SevrenTechTree {
                                 });
                             });
                         });
+                        node(RSBlocks.hydroDeconstructor, () -> {
+                            
+                        });
                     });
                 });
                 node(RSBlocks.goldRefinery, () -> {
@@ -118,7 +121,7 @@ public class SevrenTechTree {
 
                         });
                     });
-                    node(RSBlocks.sandCrusher, () -> {
+                    node(RSBlocks.scrapCrusher, () -> {
                         node(RSBlocks.graphiteInfuser, () -> {
                             node(RSBlocks.siliconFrostforge, () -> {
                                 node(RSBlocks.plasteelCrucible, () -> {
