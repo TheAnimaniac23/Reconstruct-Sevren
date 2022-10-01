@@ -10,7 +10,7 @@ public class RSItems {
     
     public static void load() {
         gold = new Item("gold", Color.valueOf("FFD700"));
-        cobalt = new Item("cobalt", Color.valueOf("0047ab"))
-        plasteel = new Item("plasteel", Color.valueOf("678b59"))
+        cobalt = new Item("cobalt", Color.valueOf("0047ab"));
+        plasteel = new Item("plasteel", Color.valueOf("678b59"));
     }
 }
